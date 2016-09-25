@@ -13,6 +13,10 @@ Initial set up for the risk application.
  
  You can see the upload view in the upper menu (Upload)
  
+ For the csv file you can use the settled and unsettled csv file that you've sent. 
+ 
+ Thanks :)
+ 
  
  
  
