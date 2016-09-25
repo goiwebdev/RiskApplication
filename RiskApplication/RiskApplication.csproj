@@ -205,6 +205,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RiskViewModel.cs" />
     <Compile Include="Models\SettledBet.cs" />
     <Compile Include="Models\UnsettledBet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
