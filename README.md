@@ -11,6 +11,8 @@ Initial set up for the risk application.
  - Make sure the file name for unsettled bets is Unsettled.csv
  
  
+ You can see the upload view in the upper menu (Upload)
+ 
  
  
  
