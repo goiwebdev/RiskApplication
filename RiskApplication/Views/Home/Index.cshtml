@@ -1,59 +1,64 @@
-﻿@{
+﻿@model RiskApplication.Models.RiskViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
+<form class="form-horizontal">
+    <div class="row">
 
-<div class="row">
+        <h3>Settled Bets</h3>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Total Wins</th>
+                        <th>Total Bets</th>
+                        <th>Winning Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.settledBets)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalWinsCount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalBets)
+                            </td>
+                            <td>
+                                @item.WinningPercentage.ToString("0.00")%
 
-    <h3>Settled Bets</h3>
-    <div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Customer Id</th>
-                    <th>Total Wins</th>
-                    <th>Total Bets</th>
-                    <th>Winning Percentage</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>x</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>x</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>x</td>
-                </tr>
-            </tbody>
-        </table>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
 
+</form>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Getting Settled Bets</h2>
+            <p>
+                A customer wins on more than 60% of their bets (i.e in the settled bets data, they have a value in the "win" column for more than 60% of their bets)
+            </p>
 
-</div>
+        </div>
+        <div class="col-md-6">
+            <h2>Getting Unsettled Bets</h2>
+            <p>This will help to analyze if there is a unusual risk for the given customer.</p>
 
+        </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <h2>Getting Settled Bets</h2>
-        <p>
-            A customer wins on more than 60% of their bets (i.e in the settled bets data, they have a value in the "win" column for more than 60% of their bets)
-        </p>
-        
     </div>
-    <div class="col-md-6">
-        <h2>Getting Unsettled Bets</h2>
-        <p>This will help to analyze if there is a unusual risk for the given customer.</p>
-         
-    </div>
- 
-</div>

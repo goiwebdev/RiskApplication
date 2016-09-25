@@ -10,5 +10,8 @@ namespace RiskApplication.Models
         public string SettledFileName { get; set; }
         public string UnSettledFileName { get; set; }
 
+        public List<SettledBet> settledBets;
+        public List<UnsettledBet> unsettledBets;
+
     }
 }
