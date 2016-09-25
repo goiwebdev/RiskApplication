@@ -20,11 +20,15 @@ namespace RiskApplication.Controllers
         {
             var initialData = new RiskViewModel();
             var settledFileName = "Settled.csv";
+            var unsettledFileName = "Unsettled.csv";
 
             string pathSettled = string.Format("{0}/{1}", Server.MapPath("~/Content/Uploads"), settledFileName);
+            string pathUnSettled = string.Format("{0}/{1}", Server.MapPath("~/Content/Uploads"), unsettledFileName);
 
             List<SettledBet> settledBets = new List<SettledBet>();
             List<UnsettledBet> unsettledBets = new List<UnsettledBet>();
+
+            // this is for settled bets initial load of data 
             if (System.IO.File.Exists(pathSettled))
             {
                 DataTable dtSettled = ConvertDataTable.ConvertCSVtoDataTable(pathSettled);
@@ -63,8 +67,46 @@ namespace RiskApplication.Controllers
                     });                
             }
 
+            // this is for initial load for unsettled data
+            
+            if (System.IO.File.Exists(pathUnSettled) && System.IO.File.Exists(pathSettled))
+            {
+
+                DataTable dt2 = ConvertDataTable.ConvertCSVtoDataTable(pathUnSettled);
+                foreach (DataRow dr in dt2.Rows)
+                {
+
+                    unsettledBets.Add(new UnsettledBet
+                    {
+                        CustomerId = Convert.ToInt32(dr["Customer"].ToString()),
+                        EventId = Convert.ToInt32(dr["Event"].ToString()),
+                        ParticipantId = Convert.ToInt32(dr["Participant"].ToString()),
+                        Stake = Convert.ToInt32(dr["Stake"].ToString()),
+                        ToWin = Convert.ToInt32(dr["To Win"].ToString()),
+                        IsRisky = (from p in settledBets
+                                   where
+                                   p.WinningPercentage >= 60 &&
+                                   p.CustomerId == Convert.ToInt32(dr["Customer"].ToString())
+                                   select p
+                                    ).Any(),
+                        IsUnusual = (from p in settledBets
+                                     where p.CustomerId == Convert.ToInt32(dr["Customer"].ToString())
+                                     && Convert.ToInt32(dr["Stake"].ToString()) >= p.AverageBet * 10
+                                     select p).Any(),
+                        IsHighlyUnusual = (from p in settledBets
+                                           where p.CustomerId == Convert.ToInt32(dr["Customer"].ToString())
+                                           && Convert.ToInt32(dr["Stake"].ToString()) >= p.AverageBet * 30
+                                           select p).Any()
+
+                    });
+
+                }
+
+            }
+
+
             initialData.settledBets = settledBets;
-            initialData.unsettledBets = unsettledBets;
+            initialData.unsettledBets = unsettledBets.OrderBy(x => x.CustomerId).ToList();
 
             return initialData;
 

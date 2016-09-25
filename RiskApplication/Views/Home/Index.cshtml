@@ -7,8 +7,17 @@
 <style type="text/css">
     .red-Color {
         color: red;
-        font-size:small;
+        font-size: small;
     }
+
+    .red-back {
+        background-color: #d74a4a;
+        color: white;
+    }
+
+        .red-back:hover {
+        color:black;
+        }
 </style>
 
 <div class="form-horizontal">
@@ -73,12 +82,13 @@
                         <th>Risky</th>
                         <th>Unusual</th>
                         <th>Highly Unusual</th>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.unsettledBets)
                     {
-                        <tr>
+                        <tr class="@(item.ToWin >= 1000 ? "red-back" : null)">
                             <td>
                                 @Html.DisplayFor(modelItem => item.CustomerId)
                             </td>
@@ -108,7 +118,9 @@
                                     <label>Yes</label>
                                 }
                             </td>
-
+                            <td>
+                                <label>@(item.ToWin >= 1000 ? "$1000 or more" : null)</label>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -135,4 +147,13 @@
 
     </div>
 
+</div>
+<div class="row">
+    <div class="col-md-12">
+       
+        <p class="red-Color">
+            <i> Note : Make sure you have uploaded the settled and unsettled bets in Upload View.</i>
+        </p>
+
+    </div>
 </div>
