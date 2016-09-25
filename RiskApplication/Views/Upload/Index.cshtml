@@ -3,9 +3,11 @@
     ViewBag.Title = "Index";
 }
 
+
+<label style="color:red">@ViewBag.Message</label>
 <h2>Upload Bets</h2>
 
-@using (Html.BeginForm("Index", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadBets", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
 {
     <div>
