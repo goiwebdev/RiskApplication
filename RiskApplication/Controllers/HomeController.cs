@@ -24,7 +24,7 @@ namespace RiskApplication.Controllers
             string pathSettled = string.Format("{0}/{1}", Server.MapPath("~/Content/Uploads"), settledFileName);
 
             List<SettledBet> settledBets = new List<SettledBet>();
-
+            List<UnsettledBet> unsettledBets = new List<UnsettledBet>();
             if (System.IO.File.Exists(pathSettled))
             {
                 DataTable dtSettled = ConvertDataTable.ConvertCSVtoDataTable(pathSettled);
@@ -64,6 +64,7 @@ namespace RiskApplication.Controllers
             }
 
             initialData.settledBets = settledBets;
+            initialData.unsettledBets = unsettledBets;
 
             return initialData;
 

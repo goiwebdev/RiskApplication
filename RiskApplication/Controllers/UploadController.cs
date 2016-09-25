@@ -20,8 +20,8 @@ namespace RiskApplication.Controllers
             string pathSettled = string.Format("{0}/{1}", Server.MapPath("~/Content/Uploads"), settledFileName);
             string pathUnSettled = string.Format("{0}/{1}", Server.MapPath("~/Content/Uploads"), unsettledFileName);
 
-            riskViewModel.SettledFileName = System.IO.File.Exists(pathSettled) ? settledFileName.ToString() + "(Existing)" : "";
-            riskViewModel.UnSettledFileName = System.IO.File.Exists(pathUnSettled) ? unsettledFileName.ToString() + "(Existing)" : "";
+            riskViewModel.SettledFileName = System.IO.File.Exists(pathSettled) ? settledFileName.ToString() + "(Existing)" : "No Uploaded File.";
+            riskViewModel.UnSettledFileName = System.IO.File.Exists(pathUnSettled) ? unsettledFileName.ToString() + "(Existing)" : "No Uploaded File.";
             ViewBag.Message = TempData["ErrorMessage"];
             return View(riskViewModel);
         }

@@ -15,7 +15,10 @@ namespace RiskApplication.Models
         public int Stake { get; set; }
 
         public int ToWin { get; set; }
+        public bool IsRisky { get; set; }
+        public bool IsUnusual { get; set; }
 
+        public bool IsHighlyUnusual { get; set; }
 
     }
 }

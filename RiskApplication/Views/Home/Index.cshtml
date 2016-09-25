@@ -4,7 +4,14 @@
     ViewBag.Title = "Home Page";
 }
 
-<form class="form-horizontal">
+<style type="text/css">
+    .red-Color {
+        color: red;
+        font-size:small;
+    }
+</style>
+
+<div class="form-horizontal">
     <div class="row">
 
         <h3>Settled Bets</h3>
@@ -41,24 +48,91 @@
                     }
                 </tbody>
             </table>
+            @if (Model.settledBets.Count == 0)
+            {
+                <label class="red-Color">You need to upload settled bets file.</label>
+            }
         </div>
 
 
+    </div>
+
+</div>
+
+<form class="form-horizontal">
+    <div class="row">
+
+        <h3>Unsettled Bets</h3>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Stake</th>
+                        <th>To Win</th>
+                        <th>Risky</th>
+                        <th>Unusual</th>
+                        <th>Highly Unusual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.unsettledBets)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stake)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ToWin)
+                            </td>
+                            <td>
+                                @if (item.IsRisky)
+                                {
+                                    <label>Yes</label>
+                                }
+
+                            </td>
+                            <td>
+                                @if (item.IsUnusual)
+                                {
+                                    <label>Yes</label>
+                                }
+
+                            </td>
+                            <td>
+                                @if (item.IsHighlyUnusual)
+                                {
+                                    <label>Yes</label>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (Model.unsettledBets.Count == 0)
+            {
+                <label class="red-Color">You need to upload unsettled bets file.</label>
+            }
+        </div>
     </div>
 
 </form>
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Getting Settled Bets</h2>
-            <p>
-                A customer wins on more than 60% of their bets (i.e in the settled bets data, they have a value in the "win" column for more than 60% of their bets)
-            </p>
-
-        </div>
-        <div class="col-md-6">
-            <h2>Getting Unsettled Bets</h2>
-            <p>This will help to analyze if there is a unusual risk for the given customer.</p>
-
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Getting Settled Bets</h2>
+        <p>
+            A customer wins on more than 60% of their bets (i.e in the settled bets data, they have a value in the "win" column for more than 60% of their bets)
+        </p>
 
     </div>
+    <div class="col-md-6">
+        <h2>Getting Unsettled Bets</h2>
+        <p>This will help to analyze if there is a unusual risk for the given customer.</p>
+
+    </div>
+
+</div>
